@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
-import { API_ROOT } from '../api-endpoint'
 
+import { api_url } from '../api-endpoint'
 import BlogPostsCard from './BlogPostCard'
-
 import './BlogPostsOverview.css'
 
 class BlogPostsOverview extends Component {
@@ -16,8 +15,7 @@ class BlogPostsOverview extends Component {
     }
 
     componentDidMount() {
-        console.log("fetching: " + API_ROOT + 'posts')
-        fetch(API_ROOT + 'posts')
+        fetch(api_url + '/posts')
             .then(results => results.json())
             .then(data => {
                 let cards = data.posts.map(val => {
