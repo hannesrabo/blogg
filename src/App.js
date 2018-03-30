@@ -5,14 +5,15 @@ import BlogPostsOverview from './components/BlogPostsOverview'
 
 import { Auth } from 'aws-amplify'
 import { api_url } from './api-endpoint';
+import LayoutTemplate from './components/LayoutTemplate';
 
 class App extends Component {
   constructor(props) {
     super(props)
 
-    this.state = {
-      idToken: ''
-    }
+    // this.state = {
+    //   idToken: ''
+    // }
   }
 
   goTo(route) {
@@ -40,17 +41,19 @@ class App extends Component {
     // })
   }
 
-
   render() {
     return (
-      <div className="App">
+      <div className="app-wrapper">
+        <LayoutTemplate
+          header="Blogg"
+        >
+          <div className="full-page-info">
+            <h2 className="full-page-info--header">This is the information header</h2>
+            <p className="full-page-info--text">This is the text block This is the text block This is the text block This is the text block This is the text block This is the text block This is the text block This is the text block This is the text block This is the text block This is the text block This is the text block This is the text block This is the text block This is the text block</p>
+          </div>
 
-        <header className="App-header">
-          <h1 className="App-title">React blogg</h1>
-        </header>
-        <div className="posts-wrapper">
           <BlogPostsOverview />
-        </div>
+        </LayoutTemplate>
       </div>
     )
   }

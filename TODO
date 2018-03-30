@@ -1,0 +1,7 @@
+# TODO list
+- Make sure that components are editable (how to capture the event?)
+- Download skeleton and import it
+- make sure that you can click on a post (how to route?)
+
+#TO consider
+- can we delete the global styles?

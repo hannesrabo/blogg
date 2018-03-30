@@ -1,5 +1,43 @@
 .blog-post-card {
-    border: 1px solid gray;
-    border-radius: 8px;
     flex: 1;
+    margin: 5px;
+    box-shadow: 2px 2px 5px #b1b1b1;
+    background-color: #f3f3f3;
+    padding: 15px;
+    color: #504f4f;
+    cursor: pointer;
+}
+
+.blog-post-card:hover {
+    color: black;
+    background-color: #f9f9f9;    
+    box-shadow: 3px 3px 5px #b1b1b1;    
+}
+
+.blog-post-card:hover .blog-post-card-content h3 {
+    text-decoration: underline;
+}
+
+.blog-post-card-content--title {
+    color: black;
+}
+
+.blog-post-card__admin {
+    display: flex;
+}
+
+.blog-post-card__admin .blog-post-card-content {
+    flex: 1;
+    padding: 15px;
+}
+
+.blog-post-card__admin .blog-post-card-controls {
+    flex: 0 0 50px;
+    padding: 15px; 
+}
+
+.blog-post-card__admin .blog-post-card-content input, .blog-post-card__admin .blog-post-card-content textarea {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
 }

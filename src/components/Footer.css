@@ -1,0 +1,21 @@
+.footer {
+    background-color: #383838;
+    color: white;
+    height: 70px;
+    padding: 30px;
+    text-align: center;
+}
+
+.footer--text {
+    font-size: 1em;
+    margin: 15px;
+}
+
+.footer--text__fine {
+    font-size: 0.7em;
+    color: #eee;
+}
+
+.footer a {
+    color: inherit;
+}
