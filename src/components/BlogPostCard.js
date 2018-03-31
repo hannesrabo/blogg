@@ -1,4 +1,7 @@
 import React, { Component } from 'react'
+
+import { api_url } from '../api-endpoint'
+
 import './BlogPostCard.css'
 
 class BlogPostCard extends Component {
@@ -9,42 +12,136 @@ class BlogPostCard extends Component {
             editMode: false,
             title: this.props.data.title,
             content: this.props.data.content,
-            date: this.props.data.date
+            date: this.props.data.date,
+            updated: false,
         }
+
+        let idToken = sessionStorage.getItem("idToken")
+        if (idToken)
+            this.idToken = idToken;
+        else
+            console.error("Could not find id token")
+    }
+
+    postData = (URL, data) => {
+        if (!this.idToken) {
+            console.error("Not authorized! Login now!")
+            return
+        }
+
+        let config = {
+            // credentials: 'same-origin', 
+            headers: {
+                Authorization: this.idToken
+            },
+            method: 'POST', // *GET, POST, PUT, DELETE, etc.
+            body: JSON.stringify(data),
+            // mode: 'cors', // no-cors, cors, *same-origin
+        }
+
+        return fetch(URL, config)
+    }
+
+    putData = (URL, data) => {
+        if (!this.idToken) {
+            console.error("Not authorized! Login now!")
+            return
+        }
+
+        let config = {
+            // credentials: 'same-origin', 
+            headers: {
+                Authorization: this.idToken
+            },
+            method: 'PUT', // *GET, POST, PUT, DELETE, etc.
+            body: JSON.stringify(data),
+            // mode: 'cors', // no-cors, cors, *same-origin
+        }
+
+        return fetch(URL, config)
+    }
+
+    deleteData = (URL) => {
+        if (!this.idToken) {
+            console.log(this.idToken)
+            console.error("Not authorized! Login now!")
+            return
+        }
+
+        let config = {
+            // credentials: 'same-origin', 
+            headers: {
+                Authorization: this.idToken
+            },
+            method: 'DELETE', // *GET, POST, PUT, DELETE, etc.
+            // mode: 'cors', // no-cors, cors, *same-origin
+        }
+
+        return fetch(URL, config)
     }
 
     editPostCard = () => {
+        // This means save now
+        if (this.state.editMode && this.state.updated) {
+            let tempObj = Object.assign({}, this.props.data)
+            Object.assign(tempObj, {
+                title: this.state.title,
+                content: this.state.content,
+                date: this.state.date,
+            })
+            this.putData(api_url + process.env.PUBLIC_URL + '/posts/' + this.props.id, tempObj)
+                .then(dat => dat.json())
+                .then(ret => console.log(ret))
+                .catch(err => console.error(err))
+        }
+
+
         this.setState({
-            editMode: !this.state.editMode
+            editMode: !this.state.editMode,
+            update: false,
         })
     }
 
-    titleChanged = (newTitle, second) => {
-        console.log("title changed")
-
-        console.log(newTitle)
-        console.log(second)
-        // this.setState({
-        //     title: newTitle
-        // })
-    }
-
-    contentChanged = (newContent) => {
-        console.log("Content changed")
+    titleChanged = (event) => {
         this.setState({
-            content: newContent
+            title: event.target.value,
+            updated: true,
         })
     }
 
-    dateChanged = (newDate) => {
-        console.log("Date changed")
+    contentChanged = (event) => {
         this.setState({
-            date: newDate
+            content: event.target.value,
+            updated: true,
+        })
+    }
+
+    dateChanged = (event) => {
+        this.setState({
+            date: event.target.value,
+            updated: true,
         })
     }
 
     showBlogPost = () => {
         console.log("Render this!")
+    }
+
+    deletePost = () => {
+        console.log("Deleted post: " + process.env.PUBLIC_URL + '/posts/' + this.props.id)
+        this.props.deleteFunction(this.props.id)
+
+        this.deleteData(api_url + process.env.PUBLIC_URL + '/posts/' + this.props.id)
+            .then(dat => dat.json())
+            .then(ret => {
+                console.log(ret)
+                console.log("Deleted post: " + process.env.PUBLIC_URL + '/posts/' + this.props.id)
+            })
+            .catch(err => {
+                console.error("Something wrong")
+                console.error(err)
+            })
+
     }
 
     renderContentPreview = () => {
@@ -70,6 +167,7 @@ class BlogPostCard extends Component {
         if (this.state.editMode) {
             contents = (
                 <div className="blog-post-card-content">
+                    <h2 className="blog-post-card-content__edit-header">Edit Post:</h2>
                     <p>Title:</p>
                     <input
                         type="text"
@@ -103,6 +201,12 @@ class BlogPostCard extends Component {
                         type="button"
                         onClick={this.editPostCard}
                         value={buttonValue}
+                    />
+                    <input
+                        type="button"
+                        className="delete"
+                        onClick={this.deletePost}
+                        value="Delete Post"
                     />
                 </div>
             </div>

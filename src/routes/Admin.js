@@ -20,6 +20,7 @@ class Admin extends Component {
         Auth.currentAuthenticatedUser().then(dat => {
             if (dat) {
                 this.setState({ idToken: dat.signInUserSession.idToken.jwtToken })
+                sessionStorage.setItem("idToken", dat.signInUserSession.idToken.jwtToken)
 
                 // console.log("Fetching")
                 // This would be how to fetch things

@@ -19,20 +19,26 @@ class BlogPostsOverview extends Component {
         }
     }
 
+    deleteCardWithId = (id) => {
+        for (let i = 0; i < this.state.cards.length; i++) {
+            if (this.state.cards[i]._id == id) {
+                this.state.cards.splice(i, 1)
+                break
+            }
+        }
+        this.setState({
+            cards: this.state.cards
+        })
+    }
+
     componentDidMount() {
         console.log("Fetching: " + api_url + '/posts')
         fetch(api_url + '/posts')
             .then(results => results.json())
             .then(data => {
-                let cards = data.posts.map(val => {
-                    return (
-                        <BlogPostsCard
-                            key={val._id}
-                            data={val}
-                            isAdmin={this.state.isAdmin}
-                        />
-                    )
-                })
+                let cards = data.posts
+
+
 
                 this.setState({ cards: cards })
             })
@@ -44,13 +50,23 @@ class BlogPostsOverview extends Component {
 
     render() {
         let titleText = this.state.isAdmin ? 'Redigera Inägg' : 'Senaste Inläggen'
-
         return (
             <div className="blog-posts-overview">
                 <h2 className="blog-posts-overview--header">
                     {titleText}
                 </h2>
-                {this.state.cards}
+                {this.state.cards.map(card => {
+                    return (
+                        <BlogPostsCard
+                            key={card._id}
+                            id={card._id}
+                            data={card}
+                            isAdmin={this.state.isAdmin}
+                            deleteFunction={this.deleteCardWithId}
+                        />
+                    )
+                })
+                }
             </div>
         )
     }

@@ -31,13 +31,30 @@
     padding: 15px;
 }
 
+.blog-post-card__admin .blog-post-card-content p {
+    margin-bottom: 5px;
+}
+
 .blog-post-card__admin .blog-post-card-controls {
     flex: 0 0 50px;
     padding: 15px; 
+}
+
+.blog-post-card__admin .blog-post-card-controls input {
+    width: 100%;
+}
+
+.blog-post-card__admin .blog-post-card-controls input.delete {
+    background-color: #ff7171;
 }
 
 .blog-post-card__admin .blog-post-card-content input, .blog-post-card__admin .blog-post-card-content textarea {
     display: block;
     width: 100%;
     box-sizing: border-box;
+    resize: vertical;
+}
+
+.blog-post-card-content__edit-header {
+    border-bottom: 2px solid black;
 }
