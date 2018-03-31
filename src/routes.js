@@ -6,6 +6,7 @@ import history from './history';
 import App from './App';
 import Admin from './routes/Admin'
 import Page404 from './routes/Page404'
+import FullScreenPost from './routes/FullScreenPost'
 
 export const makeMainRoutes = () => {
 	return (
@@ -21,6 +22,11 @@ export const makeMainRoutes = () => {
 						exact
 						path={process.env.PUBLIC_URL + '/admin'}
 						component={Admin}
+					/>
+					<Route
+						exact
+						path={process.env.PUBLIC_URL + '/posts/:id'}
+						component={FullScreenPost}
 					/>
 					<Route component={Page404} />
 				</Switch>

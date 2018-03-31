@@ -1,0 +1,12 @@
+
+.full-page-info--text input {
+    color: #000;
+    background-color: white;
+}
+
+.admin-add-post-container {
+    flex: 100%;
+    padding-top: 25px;
+    border-top: 2px solid black;
+    margin-top: 20px;
+}

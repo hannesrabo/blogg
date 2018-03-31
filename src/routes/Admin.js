@@ -5,6 +5,8 @@ import { withAuthenticator } from 'aws-amplify-react'
 import LayoutTemplate from '../components/LayoutTemplate'
 import BlogPostsOverview from '../components/BlogPostsOverview';
 
+import './Admin.css'
+import BlogPostCard from '../components/BlogPostCard';
 
 class Admin extends Component {
 
@@ -12,8 +14,15 @@ class Admin extends Component {
         super(props)
 
         this.state = {
-            idToken: null
+            idToken: null,
+            newPost: false,
         }
+    }
+
+    createNewPost = () => {
+        this.setState({
+            newPost: true,
+        })
     }
 
     componentDidMount() {
@@ -47,8 +56,28 @@ class Admin extends Component {
         })
     }
 
+    stopCreationOfPost = () => {
+        this.setState({
+            newPost: false
+        })
+    }
+
     render() {
-        console.log(Auth.user)
+        let cardData = {
+            title: "",
+            content: "",
+            date: new Date(),
+        }
+        let editArea = (
+            <div className="admin-add-post-container">
+                <BlogPostCard
+                    data={cardData}
+                    isAdmin={true}
+                    deleteFunction={this.stopCreationOfPost}
+                    editMode={true}
+                />
+            </div>
+        )
         return (
             <div>
                 <LayoutTemplate
@@ -56,7 +85,20 @@ class Admin extends Component {
                 >
                     <div className="full-page-info">
                         <h2 className="full-page-info--header">This is the admin info / control</h2>
-                        <p className="full-page-info--text">This is the text block This is the text block This is the text block This is the text block This is the text block This is the text block This is the text block This is the text block This is the text block This is the text block This is the text block This is the text block This is the text block This is the text block This is the text block</p>
+                        <div className="full-page-info--text">
+                            <p>
+                                This is the text block This is the text block This is the text block This is the text block This is the text block This is the text block This is the text block This is the text block This is the text block This is the text block This is the text block This is the text block This is the text block This is the text block This is the text block
+                            </p>
+                            {!this.state.newPost &&
+                                (<input
+                                    type="button"
+                                    value="Create new post"
+                                    onClick={this.createNewPost} />)
+                            }
+                        </div>
+                        {this.state.newPost &&
+                            (editArea)
+                        }
                     </div>
 
                     <BlogPostsOverview isAdmin={true} />
@@ -66,5 +108,5 @@ class Admin extends Component {
     }
 }
 
-// export default withAuthenticator(Admin)
-export default Admin
+export default withAuthenticator(Admin)
+// export default Admin

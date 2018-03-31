@@ -2,9 +2,6 @@ import React, { Component } from 'react'
 import './App.css'
 
 import BlogPostsOverview from './components/BlogPostsOverview'
-
-import { Auth } from 'aws-amplify'
-import { api_url } from './api-endpoint';
 import LayoutTemplate from './components/LayoutTemplate';
 
 class App extends Component {

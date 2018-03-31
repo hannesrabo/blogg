@@ -14,6 +14,7 @@ class BlogPostsOverview extends Component {
 
         this.state = {
             isAdmin: isAdmin,
+            fetchState: "fetching",
             internalState: "text",
             cards: [],
         }
@@ -21,7 +22,7 @@ class BlogPostsOverview extends Component {
 
     deleteCardWithId = (id) => {
         for (let i = 0; i < this.state.cards.length; i++) {
-            if (this.state.cards[i]._id == id) {
+            if (this.state.cards[i]._id === id) {
                 this.state.cards.splice(i, 1)
                 break
             }
@@ -31,20 +32,20 @@ class BlogPostsOverview extends Component {
         })
     }
 
-    componentDidMount() {
+    componentDidMount = () => {
         console.log("Fetching: " + api_url + '/posts')
         fetch(api_url + '/posts')
             .then(results => results.json())
             .then(data => {
-                let cards = data.posts
-
-
-
-                this.setState({ cards: cards })
+                let cards = data.posts.reverse()
+                this.setState({ fetchState: "success", cards: cards })
             })
             .catch(err => {
-                console.error("Error in blog posts overview")
+                console.error("Error while fetching")
                 console.error(err)
+                this.setState({
+                    fetchState: 'fail'
+                })
             })
     }
 
@@ -66,6 +67,12 @@ class BlogPostsOverview extends Component {
                         />
                     )
                 })
+                }
+                {this.state.fetchState === 'fetching' &&
+                    <p>Fetching posts</p>
+                }
+                {this.state.fetchState === 'fail' &&
+                    <p>Failed to fetch posts</p>
                 }
             </div>
         )

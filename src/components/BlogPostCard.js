@@ -1,19 +1,24 @@
 import React, { Component } from 'react'
 
 import { api_url } from '../api-endpoint'
-
+import { Redirect } from 'react-router-dom'
 import './BlogPostCard.css'
 
 class BlogPostCard extends Component {
     constructor(props) {
         super(props)
 
+        let editMode = false
+        if (this.props.editMode)
+            editMode = this.props.editMode
+
         this.state = {
-            editMode: false,
+            editMode: editMode,
             title: this.props.data.title,
             content: this.props.data.content,
             date: this.props.data.date,
             updated: false,
+            showPostFullscreen: false,
         }
 
         let idToken = sessionStorage.getItem("idToken")
@@ -89,10 +94,19 @@ class BlogPostCard extends Component {
                 content: this.state.content,
                 date: this.state.date,
             })
-            this.putData(api_url + process.env.PUBLIC_URL + '/posts/' + this.props.id, tempObj)
-                .then(dat => dat.json())
-                .then(ret => console.log(ret))
-                .catch(err => console.error(err))
+
+            // This means that our object exists
+            if (tempObj._id) {
+                this.putData(api_url + process.env.PUBLIC_URL + '/posts/' + this.props.id, tempObj)
+                    .then(dat => dat.json())
+                    .then(ret => console.log(ret))
+                    .catch(err => console.error(err))
+            } else {
+                this.postData(api_url + process.env.PUBLIC_URL + '/create', tempObj)
+                    .then(dat => dat.json())
+                    .then(ret => console.log(ret))
+                    .catch(err => console.error(err))
+            }
         }
 
 
@@ -124,12 +138,19 @@ class BlogPostCard extends Component {
     }
 
     showBlogPost = () => {
-        console.log("Render this!")
+        this.setState({
+            showPostFullscreen: true,
+        })
     }
 
     deletePost = () => {
-        console.log("Deleted post: " + process.env.PUBLIC_URL + '/posts/' + this.props.id)
         this.props.deleteFunction(this.props.id)
+
+        if (!this.props.id) {
+            console.log("Post not defined. Does not delete on server")
+            return
+        }
+        console.log("Deleted post: " + process.env.PUBLIC_URL + '/posts/' + this.props.id)
 
         this.deleteData(api_url + process.env.PUBLIC_URL + '/posts/' + this.props.id)
             .then(dat => dat.json())
@@ -141,6 +162,18 @@ class BlogPostCard extends Component {
                 console.error("Something wrong")
                 console.error(err)
             })
+
+    }
+
+    cancelEdit = () => {
+        console.log("Cancel!")
+        this.props.deleteFunction()
+        this.setState({
+            title: this.props.data.title,
+            content: this.props.data.content,
+            date: this.props.data.date,
+            editMode: false,
+        })
 
     }
 
@@ -208,14 +241,30 @@ class BlogPostCard extends Component {
                         onClick={this.deletePost}
                         value="Delete Post"
                     />
+                    {this.state.editMode &&
+                        (
+                            <input
+                                type="button"
+                                className="cancel"
+                                onClick={this.cancelEdit}
+                                value="Cancel"
+                            />
+                        )}
                 </div>
             </div>
         )
     }
 
     render() {
+        if (this.state.showPostFullscreen) {
+            return (
+                <Redirect to={process.env.PUBLIC_URL + "/posts/" + this.props.id} />
+            )
+        }
+
         if (this.props.isAdmin) {
             return this.renderAdmin()
+            // Show this post fullscreeen..
         } else {
             return (
                 <div className="blog-post-card blog-post-card__admin">

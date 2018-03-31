@@ -1,0 +1,8 @@
+.full-screen-markdown-wrapper {
+    margin: 20px;
+}
+
+.full-screen-markdown-wrapper h1 {
+    padding: 5px;
+    border-bottom: 2px solid black;
+}

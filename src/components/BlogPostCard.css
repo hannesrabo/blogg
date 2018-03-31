@@ -48,6 +48,14 @@
     background-color: #ff7171;
 }
 
+.blog-post-card__admin .blog-post-card-controls input.cancel {
+    background-color: #ffbd71;
+}
+
+.blog-post-card__admin .blog-post-card-content textarea {
+    height: 150px;
+}
+
 .blog-post-card__admin .blog-post-card-content input, .blog-post-card__admin .blog-post-card-content textarea {
     display: block;
     width: 100%;
