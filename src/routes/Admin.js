@@ -31,23 +31,6 @@ class Admin extends Component {
                 this.setState({ idToken: dat.signInUserSession.idToken.jwtToken })
                 sessionStorage.setItem("idToken", dat.signInUserSession.idToken.jwtToken)
 
-                // console.log("Fetching")
-                // This would be how to fetch things
-                // let config = {
-                //   // credentials: 'same-origin', 
-                //   headers: {
-                //     Authorization: this.state.idToken
-                //   },
-                //   // method: 'GET', // *GET, POST, PUT, DELETE, etc.
-                //   // mode: 'cors', // no-cors, cors, *same-origin
-                // }
-
-                // fetch(api_url + "/postsAuth", config)
-                //   .then(raw => raw.json())
-                //   .then(res => {
-                //     console.log(res)
-                //   })
-
                 console.log("User is logged in")
 
             } else {
@@ -84,10 +67,10 @@ class Admin extends Component {
                     header="Admin Page Header"
                 >
                     <div className="full-page-info">
-                        <h2 className="full-page-info--header">This is the admin info / control</h2>
+                        <h2 className="full-page-info--header">The admin interface and controls</h2>
                         <div className="full-page-info--text">
                             <p>
-                                This is the text block This is the text block This is the text block This is the text block This is the text block This is the text block This is the text block This is the text block This is the text block This is the text block This is the text block This is the text block This is the text block This is the text block This is the text block
+                                This is the admin interface where posts can be added and edited. Press the "Create new post" button below to add a new post. Old posts can be edited in the list below.
                             </p>
                             {!this.state.newPost &&
                                 (<input
@@ -101,7 +84,7 @@ class Admin extends Component {
                         }
                     </div>
 
-                    <BlogPostsOverview isAdmin={true} />
+                    <BlogPostsOverview isAdmin={true} history={this.props.history} />
                 </LayoutTemplate>
             </div>
         )

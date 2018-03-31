@@ -25,6 +25,10 @@
     transform: rotate(-1deg);
 }
 
+.full-screen-markdown-wrapper hr {
+    border-top: 2px solid black;
+}
+
 .full-screen-markdown-wrapper a {
     font-weight: bold;
     color: #000;

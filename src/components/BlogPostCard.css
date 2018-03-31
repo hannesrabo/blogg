@@ -55,6 +55,7 @@
 .blog-post-card__admin {
     display: flex;
     transform: none !important;
+    padding: 10px;
 }
 
 .blog-post-card__admin .blog-post-card-content {
@@ -80,6 +81,7 @@
 
 .blog-post-card__admin .blog-post-card-controls input {
     width: 100%;
+    
 }
 
 .blog-post-card__admin .blog-post-card-controls input.delete {
@@ -103,4 +105,5 @@
 
 .blog-post-card-content__edit-header {
     border-bottom: 2px solid black;
+    margin-top: 20px;
 }
