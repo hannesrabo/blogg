@@ -17,7 +17,7 @@ class FullScreenPost extends Component {
             invalidPostId: false,
             id: props.match.params.id,
             postData: {
-                title: "Loading...",
+                title: "Laddar...",
                 content: "",
                 date: new Date(),
             },
@@ -58,11 +58,13 @@ class FullScreenPost extends Component {
                 >
                     <div className="full-screen-post-title-container">
                         <h1 className="full-screen-post__title">{this.state.postData.title}</h1>
-                        <img
-                            className="full-screen-post__close-icon"
-                            src={closeIcon}
-                            alt="Close the post"
-                            onClick={this.closePost} />
+                        <div className="full-screen-post__close-icon tooltip">
+                            <img
+                                src={closeIcon}
+                                alt="Close the post"
+                                onClick={this.closePost} />
+                            <span className="tooltiptext">Close</span>
+                        </div>
                     </div>
                     <Markdown className="full-screen-markdown-wrapper" source={this.state.postData.content} />
                 </LayoutTemplate>

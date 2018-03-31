@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 
 import { api_url } from '../api-endpoint'
 import { Redirect } from 'react-router-dom'
+import RemoveMarkdown from 'remove-markdown'
 import './BlogPostCard.css'
 
 class BlogPostCard extends Component {
@@ -12,10 +13,15 @@ class BlogPostCard extends Component {
         if (this.props.editMode)
             editMode = this.props.editMode
 
+        let content = this.props.isAdmin ?
+            (this.props.data.content)
+            :
+            RemoveMarkdown(this.props.data.content).replace(/[\n|\r|>]/g, ' ').substr(0, 100)
+
         this.state = {
             editMode: editMode,
             title: this.props.data.title,
-            content: this.props.data.content,
+            content: content,
             date: this.props.data.date,
             updated: false,
             showPostFullscreen: false,
@@ -187,8 +193,10 @@ class BlogPostCard extends Component {
             <div className="blog-post-card-content"
                 onClick={this.showBlogPost}
             >
-                <h3 className="blog-post-card-content--title">{this.state.title}</h3>
-                <p>{this.state.content}</p>
+                <div className="blog-post-card-content-title-container">
+                    <h3 className="blog-post-card-content--title">{this.state.title}</h3>
+                </div>
+                <p>{this.state.content}{this.state.content.length > 98 && "[...]"}</p>
                 <span>{day}/{month}/{year}</span>
             </div>
         )
@@ -268,7 +276,7 @@ class BlogPostCard extends Component {
             // Show this post fullscreeen..
         } else {
             return (
-                <div className="blog-post-card blog-post-card__admin">
+                <div className="blog-post-card">
                     {this.renderContentPreview()}
                 </div>
             )

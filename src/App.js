@@ -35,11 +35,17 @@ class App extends Component {
     return (
       <div className="app-wrapper">
         <LayoutTemplate
-          header="Blogg"
+          header="Blogg från Kenya"
         >
           <div className="full-page-info">
-            <h2 className="full-page-info--header">This is the information header</h2>
-            <p className="full-page-info--text">This is the text block This is the text block This is the text block This is the text block This is the text block This is the text block This is the text block This is the text block This is the text block This is the text block This is the text block This is the text block This is the text block This is the text block This is the text block</p>
+            <h2 className="full-page-info--header">Kort om bloggen</h2>
+            <p className="full-page-info--text">
+              Hej!
+              <br />
+              Välkommen till min blogg om resan till Kenya. Det närmaste 4 månaderna (April - Juli 2018) kommer jag att spendera i Kenya tillsammans med några andra studenter från KTH. Här kan man läsa lite om vad jag har för mig.
+              <br /> <br />
+              Det högst troligt att useendet på bloggen över tid när jag har tid att redigera layouten.
+            </p>
           </div>
 
           <BlogPostsOverview
