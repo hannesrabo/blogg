@@ -2,10 +2,20 @@
     background-color: #383838;
     color: #eeeeee;
     padding: 20px;
+    background-image: url('../resources/zebra_pattern.png');
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .header--title {
-    margin: 35px;
     font-size: 3em;
     font-weight: bolder;
+    text-align: center;
+    margin: 0;
+    border-bottom: 2px solid white;
+}
+
+.header-backdrop {
+    background-color: rgba(47, 47, 47, 0.77);
+    padding: 30px;
 }

@@ -138,6 +138,7 @@ class BlogPostCard extends Component {
     }
 
     showBlogPost = () => {
+        this.props.history.push()
         this.setState({
             showPostFullscreen: true,
         })

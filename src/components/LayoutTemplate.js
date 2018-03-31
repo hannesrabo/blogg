@@ -5,10 +5,6 @@ import Footer from './Footer'
 import './LayoutTemplate.css'
 
 class LayoutTemplate extends Component {
-    constructor(props) {
-        super(props)
-    }
-
     render() {
         return (
             <div className="wrapper">

@@ -1,9 +1,17 @@
 .footer {
     background-color: #383838;
     color: white;
-    height: 70px;
     padding: 30px;
     text-align: center;
+    background-image: url('../resources/zebra_pattern.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-top: 5px solid black;
+}
+
+.footer-backdrop {
+    background-color: rgba(47, 47, 47, 0.77);
+    padding: 30px;
 }
 
 .footer--text {

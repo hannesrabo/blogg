@@ -7,6 +7,8 @@ import { Redirect } from 'react-router-dom'
 
 import './FullScreenPost.css'
 
+import closeIcon from '../resources/close.svg'
+
 class FullScreenPost extends Component {
     constructor(props) {
         super(props)
@@ -20,6 +22,10 @@ class FullScreenPost extends Component {
                 date: new Date(),
             },
         }
+    }
+
+    closePost = () => {
+        this.props.history.goBack()
     }
 
     componentDidMount = () => {
@@ -48,8 +54,16 @@ class FullScreenPost extends Component {
         return (
             <div>
                 <LayoutTemplate
-                    header={this.state.postData.title}
+                    header="Blogg från Kenya"
                 >
+                    <div className="full-screen-post-title-container">
+                        <h1 className="full-screen-post__title">{this.state.postData.title}</h1>
+                        <img
+                            className="full-screen-post__close-icon"
+                            src={closeIcon}
+                            alt="Close the post"
+                            onClick={this.closePost} />
+                    </div>
                     <Markdown className="full-screen-markdown-wrapper" source={this.state.postData.content} />
                 </LayoutTemplate>
             </div>

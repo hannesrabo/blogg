@@ -64,6 +64,7 @@ class BlogPostsOverview extends Component {
                             data={card}
                             isAdmin={this.state.isAdmin}
                             deleteFunction={this.deleteCardWithId}
+                            history={this.props.history}
                         />
                     )
                 })

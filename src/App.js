@@ -5,13 +5,6 @@ import BlogPostsOverview from './components/BlogPostsOverview'
 import LayoutTemplate from './components/LayoutTemplate';
 
 class App extends Component {
-  constructor(props) {
-    super(props)
-
-    // this.state = {
-    //   idToken: ''
-    // }
-  }
 
   goTo(route) {
     this.props.history.replace(`/${route}`)
@@ -49,7 +42,8 @@ class App extends Component {
             <p className="full-page-info--text">This is the text block This is the text block This is the text block This is the text block This is the text block This is the text block This is the text block This is the text block This is the text block This is the text block This is the text block This is the text block This is the text block This is the text block This is the text block</p>
           </div>
 
-          <BlogPostsOverview />
+          <BlogPostsOverview
+            history={this.props.history} />
         </LayoutTemplate>
       </div>
     )
