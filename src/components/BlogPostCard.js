@@ -103,12 +103,12 @@ class BlogPostCard extends Component {
 
             // This means that our object exists
             if (tempObj._id) {
-                this.putData(api_url + process.env.PUBLIC_URL + '/posts/' + this.props.id, tempObj)
+                this.putData(api_url + '/posts/' + this.props.id, tempObj)
                     .then(dat => dat.json())
-                    .then(ret => console.log(ret))
+                    .then(ret => console.log("Updated"))
                     .catch(err => console.error(err))
             } else {
-                this.postData(api_url + process.env.PUBLIC_URL + '/create', tempObj)
+                this.postData(api_url + '/create', tempObj)
                     .then(dat => dat.json())
                     .then(ret => console.log(ret))
                     .catch(err => console.error(err))
@@ -157,13 +157,13 @@ class BlogPostCard extends Component {
             console.log("Post not defined. Does not delete on server")
             return
         }
-        console.log("Deleted post: " + process.env.PUBLIC_URL + '/posts/' + this.props.id)
+        console.log("Deleted post: " + '/posts/' + this.props.id)
 
-        this.deleteData(api_url + process.env.PUBLIC_URL + '/posts/' + this.props.id)
+        this.deleteData(api_url + '/posts/' + this.props.id)
             .then(dat => dat.json())
             .then(ret => {
-                console.log(ret)
-                console.log("Deleted post: " + process.env.PUBLIC_URL + '/posts/' + this.props.id)
+                // console.log(ret)
+                console.log("Deleted post: " + '/posts/' + this.props.id)
             })
             .catch(err => {
                 console.error("Something wrong")
@@ -234,7 +234,7 @@ class BlogPostCard extends Component {
         }
 
         return (
-            <div className="blog-post-card blog-post-card__admin">
+            <div className={'blog-post-card blog-post-card__admin' + (this.state.editMode ? ' blog-post-card__admin-edit' : '')}>
 
                 {contents}
 

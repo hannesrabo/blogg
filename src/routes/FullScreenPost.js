@@ -66,7 +66,7 @@ class FullScreenPost extends Component {
                             <span className="tooltiptext">Close</span>
                         </div>
                     </div>
-                    <Markdown className="full-screen-markdown-wrapper" source={this.state.postData.content} />
+                    <Markdown className="full-screen-markdown-wrapper" source={this.state.postData.content} escapeHtml={false} />
                 </LayoutTemplate>
             </div>
         )

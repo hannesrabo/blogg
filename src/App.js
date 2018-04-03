@@ -4,6 +4,7 @@ import './App.css'
 import BlogPostsOverview from './components/BlogPostsOverview'
 import LayoutTemplate from './components/LayoutTemplate';
 
+
 class App extends Component {
 
   goTo(route) {

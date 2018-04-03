@@ -26,7 +26,7 @@
 }
 
 .blog-post-card .blog-post-card-content p {
-    padding: 12px;
+    padding: 12px 12px 25px 12px;
     margin: 0;
 }
 
@@ -93,7 +93,7 @@
 }
 
 .blog-post-card__admin .blog-post-card-content textarea {
-    height: 150px;
+    height: 350px;
 }
 
 .blog-post-card__admin .blog-post-card-content input, .blog-post-card__admin .blog-post-card-content textarea {
@@ -106,4 +106,25 @@
 .blog-post-card-content__edit-header {
     border-bottom: 2px solid black;
     margin-top: 20px;
+}
+
+
+@media (min-width: 1000px) {
+    .blog-post-card {
+        flex: 1 45%;
+        margin-right: 10px;
+        transition: all 1s ease-in;
+    }
+
+    .blog-post-card.blog-post-card__admin-edit {
+        max-width: 90%;
+        flex: 1 1 100%;
+    }
+}
+
+@media (min-width: 1280px) {
+    .blog-post-card {
+        flex: 1 0 30%;
+        max-width: 30%;
+    }
 }
