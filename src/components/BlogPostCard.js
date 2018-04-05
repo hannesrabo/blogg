@@ -157,13 +157,13 @@ class BlogPostCard extends Component {
             console.log("Post not defined. Does not delete on server")
             return
         }
-        console.log("Deleted post: " + '/posts/' + this.props.id)
+        console.log('Deleted post: /posts/ ' + this.props.id)
 
         this.deleteData(api_url + '/posts/' + this.props.id)
             .then(dat => dat.json())
             .then(ret => {
                 // console.log(ret)
-                console.log("Deleted post: " + '/posts/' + this.props.id)
+                console.log('Deleted post: /posts/' + this.props.id)
             })
             .catch(err => {
                 console.error("Something wrong")

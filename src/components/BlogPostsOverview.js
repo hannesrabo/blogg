@@ -4,6 +4,8 @@ import { api_url } from '../api-endpoint'
 import BlogPostsCard from './BlogPostCard'
 import './BlogPostsOverview.css'
 
+import spinning_icon from '../resources/spinning.gif'
+
 class BlogPostsOverview extends Component {
     constructor(props) {
         super(props)
@@ -70,8 +72,10 @@ class BlogPostsOverview extends Component {
                 })
                 }
                 {this.state.fetchState === 'fetching' &&
-                    <p>Fetching posts</p>
+                    <img src={spinning_icon} alt="loading posts" className="spinning-icon" />
                 }
+                {/* <img src={spinning_icon} alt="loading posts" className="spinning-icon" /> */}
+
                 {this.state.fetchState === 'fail' &&
                     <p>Failed to fetch posts</p>
                 }

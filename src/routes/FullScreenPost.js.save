@@ -6,7 +6,6 @@ import { api_url } from '../api-endpoint'
 import { Redirect } from 'react-router-dom'
 
 import './FullScreenPost.css'
-import spinning_icon from '../resources/spinning.gif'
 
 import closeIcon from '../resources/close.svg'
 
@@ -67,10 +66,7 @@ class FullScreenPost extends Component {
                             <span className="tooltiptext">Close</span>
                         </div>
                     </div>
-                    {!this.state.postData.content &&
-                        <img src={spinning_icon} alt="loading" className="spinning-icon" />
-                    }
-                    <Markdown className="full-screen-markdown-wrapper" source={this.state.postData.content} escapeHtml={false} />
+                    <Markdown className="full-screen-markdown-wrapper" source={this.state.postData.content} />
                 </LayoutTemplate>
             </div>
         )

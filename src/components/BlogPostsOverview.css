@@ -5,6 +5,13 @@
     justify-content: center;
 }
 
+.spinning-icon {
+    display: block;
+    width: 40px;
+    height: 40px;
+    margin: 40px auto;
+}
+
 .blog-posts-overview--header {
     text-align: center;
     margin-top: 20px;
